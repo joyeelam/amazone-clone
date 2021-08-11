@@ -9,10 +9,14 @@ const ShippingScreen = (props) => {
   const userSignin = useSelector(state => state.userSignin)
   const {userInfo} = userSignin
   const cart = useSelector(state => state.cart)
-  const {shippingAddress} = cart
+  const {shippingAddress, cartItems} = cart
 
   if (!userInfo) {
     props.history.push('/signin')
+  }
+
+  if (cartItems.length === 0) {
+    props.history.push('/')
   }
 
   const dispatch = useDispatch()
