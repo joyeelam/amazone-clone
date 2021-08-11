@@ -12,7 +12,7 @@ An Amazon clone created using MERN stack (MongoDB, ExpressJS, React and Node.JS)
 ## Running Locally
 ### 1. Clone repo
 ```
-$ git clone git@github.com:joyeelam/amazone-clone.git
+$ git clone https://github.com/joyeelam/amazone-clone.git
 $ cd amazone
 ```
 ### 2. Setup MongoDB
