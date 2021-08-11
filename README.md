@@ -1,7 +1,7 @@
 # Amazon_clone
 An Amazon clone created using MERN stack (MongoDB, ExpressJS, React and Node.JS)
 
-## Key:
+## Language and Tools:
 - HTML5 and CSS3: Semantic Elements, CSS Grid, Flexbox
 - React: Components, Props, Events, Hooks, Router, Axios
 - Redux: Store, Reducers, Actions
