@@ -1,5 +1,5 @@
 # Amazon_clone
-An Amazon clone created using MERN stack (MongoDB, ExpressJS, React and Node.JS) as part of [Bassir Jafarzadeh's udemy course](https://www.udemy.com/course/build-ecommerce-website-like-amazon-react-node-mongodb/).
+An Amazon clone created using MERN stack (MongoDB, ExpressJS, React and Node.JS)
 
 ## Key:
 - HTML5 and CSS3: Semantic Elements, CSS Grid, Flexbox
