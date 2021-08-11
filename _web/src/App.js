@@ -8,6 +8,7 @@ import SigninScreen from './screens/SigninScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
+import OrderScreen from './screens/OrderScreen'
 
 import {signout} from './actions/userActions'
 
@@ -59,6 +60,7 @@ const App = () => {
         <Route path='/register' component={RegisterScreen}/>
         <Route path='/shipping' component={ShippingScreen}/>
         <Route path='/payment' component={PaymentScreen}/>
+        <Route path='/confirmorder' component={OrderScreen}/>
       </main>
       <footer className='row center'>
         All rights reserved &copy;
