@@ -1,15 +1,25 @@
-import {useSelector} from 'react-redux'
+import {useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import CheckoutSteps from '../components/CheckoutSteps'
+import LoadingBox from '../components/LoadingBox'
+import MessageBox from '../components/MessageBox'
+import {createOrder} from '../actions/orderActions'
+import {ORDER_CREATE_RESET} from '../constants/orderConstants'
 
 const OrderScreen = (props) => {
+
+  const dispatch = useDispatch()
 
   const cart = useSelector(state => state.cart)
 
   if (!cart.paymentMethod) {
     props.history.push('/payment')
   }
+
+  const orderCreate = useSelector(state => state.orderCreate)
+  const {loading, success, error, order} = orderCreate
 
   const toPrice = (num) => Number(num.toFixed(2))
 
@@ -19,8 +29,17 @@ const OrderScreen = (props) => {
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice
 
   const handleCheckout = () => {
-    // pass
+    dispatch(createOrder({...cart, orderItems: cart.cartItems}))
   }
+
+  useEffect(()=>{
+    if(success) {
+      props.history.push(`/order/${order._id}`)
+      dispatch({
+        type: ORDER_CREATE_RESET
+      })
+    }
+  }, [success, order, props.history, dispatch])
 
   return (
     <div>
@@ -99,6 +118,12 @@ const OrderScreen = (props) => {
                   disabled={cart.cartItems.length === 0}
                 >Confirm Order</button>
               </li>
+              {
+                loading && <LoadingBox/>
+              }
+              {
+                error && <MessageBox variant='danger'>{error}</MessageBox>
+              }
             </ul>
           </div>
         </div>
