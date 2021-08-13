@@ -10,6 +10,7 @@ import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import OrderScreen from './screens/OrderScreen'
 import CheckoutScreen from './screens/CheckoutScreen'
+import OrderHistoryScreen from './screens/OrderHistoryScreen'
 
 import {signout} from './actions/userActions'
 
@@ -45,7 +46,12 @@ const App = () => {
                   {userInfo.name} <i className='fa fa-caret-down'></i>{' '}
                 </Link>
                 <ul className='dropdown-content'>
-                  <Link to='#signout' onClick={handleSignout}>Sign Out</Link>
+                  <li>
+                    <Link to='/orderhistory'>Order History</Link>
+                  </li>
+                  <li>
+                    <Link to='#signout' onClick={handleSignout}>Sign Out</Link>
+                  </li>
                 </ul>
               </div>
             )
@@ -62,6 +68,7 @@ const App = () => {
         <Route path='/shipping' component={ShippingScreen}/>
         <Route path='/payment' component={PaymentScreen}/>
         <Route path='/confirmorder' component={OrderScreen}/>
+        <Route path='/orderhistory' component={OrderHistoryScreen}/>
         <Route path='/order/:id' component={CheckoutScreen}/>
       </main>
       <footer className='row center'>
