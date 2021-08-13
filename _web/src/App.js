@@ -1,6 +1,8 @@
 import {Route, Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 
+import PrivateRoute from './components/PrivateRoute'
+
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
@@ -74,7 +76,7 @@ const App = () => {
         <Route path='/confirmorder' component={OrderScreen}/>
         <Route path='/orderhistory' component={OrderHistoryScreen}/>
         <Route path='/order/:id' component={CheckoutScreen}/>
-        <Route path='/profile' component={ProfileScreen}/>
+        <PrivateRoute path='/profile' component={ProfileScreen}/>
       </main>
       <footer className='row center'>
         All rights reserved &copy;

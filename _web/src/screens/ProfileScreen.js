@@ -1,9 +1,10 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
-import {profile} from '../actions/userActions'
+import {profile, update} from '../actions/userActions'
+import {USER_UPDATE_PROFILE_RESET} from '../constants/userConstants'
 
 const ProfileScreen = () => {
 
@@ -12,14 +13,35 @@ const ProfileScreen = () => {
   const {userInfo} = userSignin
   const userDetails = useSelector(state => state.userDetails)
   const {loading, error, user} = userDetails
+  const userUpdateProfile = useSelector(state => state.userUpdateProfile)
+  const {success: successUpdate, error: errorUpdate, loading: loadingUpdate} = userUpdateProfile
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
   useEffect(() => {
-    dispatch(profile(userInfo._id))
-  }, [dispatch, userInfo._id])
+    if (!user) {
+      dispatch({
+        type: USER_UPDATE_PROFILE_RESET
+      })
+      dispatch(profile(userInfo._id))
+    } else {
+      setName(user.name)
+      setEmail(user.email)
+    }
+  }, [dispatch, userInfo._id, user])
 
   const handleSubmit = e => {
     e.preventDefault()
-    // todo
+    if (password !== confirmPassword) {
+      alert('Passwords do not match')
+    } else {
+      dispatch(update({
+        userId: user._id, name, email, password
+      }))
+    }
   }
 
   return (
@@ -34,13 +56,17 @@ const ProfileScreen = () => {
           error ? <MessageBox variant='danger'>{error}</MessageBox>
           :
           <>
+            {loadingUpdate && <LoadingBox/>}
+            {errorUpdate && <MessageBox variant='danger'>{errorUpdate}</MessageBox>}
+            {successUpdate && <MessageBox variant='success'>Profile updated successfully.</MessageBox>}
             <div>
               <label htmlFor='name'>Name</label>
               <input
                 id='name'
                 type='text'
                 placeholder='Enter name'
-                value={user.name}
+                value={name}
+                onChange={e => setName(e.target.value)}
               />
             </div>
             <div>
@@ -49,7 +75,8 @@ const ProfileScreen = () => {
                 id='email'
                 type='email'
                 placeholder='Enter email'
-                value={user.email}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -58,7 +85,7 @@ const ProfileScreen = () => {
                 id='password'
                 type='password'
                 placeholder='Enter password'
-                value={user.password}
+                onChange={e => setPassword(e.target.value)}
               />
             </div>
             <div>
@@ -67,6 +94,7 @@ const ProfileScreen = () => {
                 id='confirmPassword'
                 type='password'
                 placeholder='Confirm password'
+                onChange={e => setConfirmPassword(e.target.value)}
               />
             </div>
             <div>
