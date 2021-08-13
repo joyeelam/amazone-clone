@@ -11,6 +11,7 @@ import PaymentScreen from './screens/PaymentScreen'
 import OrderScreen from './screens/OrderScreen'
 import CheckoutScreen from './screens/CheckoutScreen'
 import OrderHistoryScreen from './screens/OrderHistoryScreen'
+import ProfileScreen from './screens/ProfileScreen'
 
 import {signout} from './actions/userActions'
 
@@ -50,6 +51,9 @@ const App = () => {
                     <Link to='/orderhistory'>Order History</Link>
                   </li>
                   <li>
+                    <Link to='/profile'>User Profile</Link>
+                  </li>
+                  <li>
                     <Link to='#signout' onClick={handleSignout}>Sign Out</Link>
                   </li>
                 </ul>
@@ -70,6 +74,7 @@ const App = () => {
         <Route path='/confirmorder' component={OrderScreen}/>
         <Route path='/orderhistory' component={OrderHistoryScreen}/>
         <Route path='/order/:id' component={CheckoutScreen}/>
+        <Route path='/profile' component={ProfileScreen}/>
       </main>
       <footer className='row center'>
         All rights reserved &copy;
